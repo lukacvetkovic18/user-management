@@ -10,6 +10,7 @@ export default async (server) => {
         }
         catch(e) {
             console.error(e);
+            console.log("Ja sam mali feature za git");
         }
     }
 
