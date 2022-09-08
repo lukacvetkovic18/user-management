@@ -9,7 +9,7 @@ export default async (server) => {
             return await iR.getAllItems()
         }
         catch(e) {
-            console.error(e);
+            console.error(e + "Hello");
         }
     }
 
