@@ -1,7 +1,7 @@
 import { Repository } from "typeorm"
 import usersCtrl from "./users.ctrl";
 import { User } from "./users.entity"
-import { createUserSchema, deleteUserSchema, getAllUsersSchema, getUserSchema, updateUserSchema } from "./users.schema";
+import { addAddressSchema, createUserSchema, deleteUserSchema, getAllUsersSchema, getUserSchema, insertItemSchema, removeAddressSchema, removeItemSchema, requestPasswordResetSchema, resetPasswordSchema, updateUserSchema } from "./users.schema";
 
 export default async (fastify, opts) => {
     const userCtrl = usersCtrl(fastify);
@@ -46,5 +46,51 @@ export default async (fastify, opts) => {
         schema: updateUserSchema
     })
 
+    fastify.route({
+        method: "PUT",
+        url: "/users/addAddress",
+        //preValidation
+        handler: (await userCtrl).addAddress,
+        schema: addAddressSchema
+    })
 
+    fastify.route({
+        method: "PUT",
+        url: "/users/removeAddress",
+        //preValidation
+        handler: (await userCtrl).removeAddress,
+        schema: removeAddressSchema
+    })
+
+    fastify.route({
+        method: "POST",
+        url: "/users/addItem",
+        //preValidation
+        handler: (await userCtrl).insertItem,
+        schema: insertItemSchema
+    })
+
+    fastify.route({
+        method: "DELETE",
+        url: "/users/removeItem",
+        //preValidation
+        handler: (await userCtrl).removeItem,
+        schema: removeItemSchema
+    })
+
+    fastify.route({
+        method: "PUT",
+        url: "/users/request",
+        //preValidation
+        handler: (await userCtrl).requestPasswordReset,
+        schema: requestPasswordResetSchema
+    })
+
+    fastify.route({
+        method: "PUT",
+        url: "/users/reset",
+        //preValidation
+        handler: (await userCtrl).resetPassword,
+        schema: resetPasswordSchema
+    })
 }

@@ -1,11 +1,29 @@
 export const getAllAddressesSchema = {
     tags: ["addresses"],
-    reponse: {
+    response: {
         200: {
             type: "array",
             items: {
-                message: {
-                    type: "string"
+                type: "object",
+                properties: {
+                    id: {
+                        type: "number"
+                    },
+                    country: {
+                        type: "string"
+                    },
+                    city: {
+                        type: "string"
+                    },
+                    street: {
+                        type: "string"
+                    },
+                    streetNumber: {
+                        type: "string"
+                    },
+                    placeType: {
+                        type: "string"
+                    }
                 }
             }
         }
@@ -18,10 +36,28 @@ export const getAddressSchema = {
             type: "number"
         }
     },
-    reponse: {
+    response: {
         200: {
-            message: {
-                type: "string"
+            type: "object",
+            properties: {
+                id: {
+                    type: "number"
+                },
+                country: {
+                    type: "string"
+                },
+                city: {
+                    type: "string"
+                },
+                street: {
+                    type: "string"
+                },
+                streetNumber: {
+                    type: "string"
+                },
+                placeType: {
+                    type: "string"
+                }
             }
         }
     }
@@ -43,12 +79,12 @@ export const createAddressSchema = {
             streetNumber: {
                 type: "string"
             },
-            /*type: {
+            placeType: {
                 type: "string"
-            }*/
+            }
         }
     },
-    reponse: {
+    response: {
         200: {
             type: "object",
             properties: {
@@ -67,7 +103,7 @@ export const deleteAddressSchema = {
             id: {
                 type: "number"
             }
-        }
+        },
     },
     response: {
         200: {
@@ -83,24 +119,27 @@ export const deleteAddressSchema = {
 export const updateAddressSchema = {
     tags: ["addresses"],
     body: {
-        id: {
-            type: "number"
-        },
-        country: {
-            type: "string"
-        },
-        city: {
-            type: "string"
-        },
-        street: {
-            type: "string"
-        },
-        streetNumber: {
-            type: "string"
-        },
-        /*type: {
-            type: "string"
-        }*/
+        type: "object",
+        properties: {
+            id: {
+                type: "number"
+            },
+            country: {
+                type: "string"
+            },
+            city: {
+                type: "string"
+            },
+            street: {
+                type: "string"
+            },
+            streetNumber: {
+                type: "string"
+            },
+            placeType: {
+                type: "string"
+            }
+        }
     },
     response: {
         200: {

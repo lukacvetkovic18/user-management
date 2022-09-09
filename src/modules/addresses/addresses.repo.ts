@@ -5,17 +5,11 @@ import { Address } from "./addresses.entity";
 export class AddressesRepository extends Repository<Address> {
     
     public async getAllAddresses() {
-        const addresses = await this.find();
-        let results: string[];
-        for(let i = 0; i < addresses.length; i++) {
-            results.push(`${addresses[i].street} ${addresses[i].streetNumber}, ${addresses[i].city}, ${addresses[i].country} ---${addresses[i].type}`);
-        }
-        return results;
+        return await this.find();
     }
 
     public async getAddress(id) {
-        const address = await this.findOne(id);
-        return `${address.street} ${address.streetNumber}, ${address.city}, ${address.country} ---${address.type}`;
+        return await this.findOne(id);
     }
 
     public async createAddress(data) {
@@ -24,16 +18,16 @@ export class AddressesRepository extends Repository<Address> {
     }
 
     public async deleteAddress(id) {
-        await this
+        this
             .createQueryBuilder()
             .delete()
             .from(Address)
             .where("id = :id", { id: id })
-            .execute;
+            .execute();
         return "Address deleted successfuly."
     }
 
-    async updateAddress(data) {
+    public async updateAddress(data) {
         await this.save(this.create(data));
         return "Address updated successfuly."
     }

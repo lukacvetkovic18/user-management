@@ -33,7 +33,7 @@ export default async (server) => {
 
     const deleteAdmin = async (req, reply) => {
         try {
-            return await aR.deleteAdmin(req.params.id)
+            return await aR.deleteAdmin(req.body.id)
         }
         catch(e) {
             console.error(e);

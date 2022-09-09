@@ -33,7 +33,7 @@ export default async (server) => {
 
     const deleteUser = async (req, reply) => {
         try {
-            return await uR.deleteUser(req.params.id)
+            return await uR.deleteUser(req.body.id)
         }
         catch(e) {
             console.error(e);
@@ -49,6 +49,60 @@ export default async (server) => {
         }
     }
 
+    const addAddress = async (req, reply) => {
+        try {
+            return await uR.addAddress(req.body.user_id, req.body.address_id)
+        }
+        catch(e) {
+            console.error(e);
+        }
+    }
+
+    const removeAddress = async (req, reply) => {
+        try {
+            return await uR.removeAddress(req.body.user_id, req.body.address_id)
+        }
+        catch(e) {
+            console.error(e);
+        }
+    }
+
+    const insertItem = async (req, reply) => {
+        try {
+            return await uR.insertItem(req.body)
+        }
+        catch(e) {
+            console.error(e);
+        }
+    }
+
+    const removeItem = async (req, reply) => {
+        try {
+            return await uR.removeItem(req.body.id)
+        }
+        catch(e) {
+            console.error(e);
+        }
+    }
+
+    const requestPasswordReset = async (req, reply) => {
+        try {
+            const data = await uR.requestPasswordReset(req.body.admin_id, req.body.email)
+            return await server.sendMail(data);
+        }
+        catch(e) {
+            console.error(e);
+        }
+    }
+
+    const resetPassword = async (req, reply) => {
+        try {
+            return await uR.resetPassword(req.body.code, req.body.email, req.body.newPassword)
+        }
+        catch(e) {
+            console.error(e);
+        }
+    }
 
     return {
         getAllUsers,
@@ -56,5 +110,11 @@ export default async (server) => {
         createUser,
         deleteUser,
         updateUser,
+        addAddress,
+        removeAddress,
+        insertItem,
+        removeItem,
+        requestPasswordReset,
+        resetPassword
     }
 }

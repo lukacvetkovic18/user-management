@@ -1,5 +1,6 @@
 import * as bcrypt from "bcrypt";
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, BeforeInsert, BeforeUpdate, ManyToMany, JoinTable, OneToMany } from "typeorm"
+import internal from "stream";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, BeforeInsert, BeforeUpdate, ManyToMany, JoinTable, OneToMany, ManyToOne } from "typeorm"
 import { Address } from "../addresses/addresses.entity";
 import { Item } from "../items/items.entity";
 
@@ -15,7 +16,7 @@ export class User extends BaseEntity {
     @Column({ type: "varchar", nullable: false })
     lastName: string
 
-    @Column({ type: "varchar", nullable: false })
+    @Column({ type: "varchar", unique: true })
     email: string
 
     @Column({ type: "varchar", nullable: false })
@@ -33,11 +34,11 @@ export class User extends BaseEntity {
     @UpdateDateColumn()
     updatedAt: Date
 
-    @ManyToMany(() => Address)
+    @ManyToMany(() => Address, (address) => address.users, { cascade: true })
     @JoinTable()
     addresses: Address[]
 
-    @OneToMany(() => Item, (item) => item.user)
+    @OneToMany(() => Item, (item) => item.user, { cascade: true })
     items: Item[]
 
     @BeforeInsert()
@@ -50,4 +51,16 @@ export class User extends BaseEntity {
     async comparePassword(input: string) : Promise<boolean> {
         return await bcrypt.compare(input, this.password);
     }
+
+    @OneToMany(() => Pin, (pin) => pin.user, { cascade: true })
+    pins: Pin[]
+}
+
+@Entity()
+export class Pin {
+    @PrimaryGeneratedColumn()
+    code: number
+
+    @ManyToOne(() => User, (user) => user.pins)
+    user: User
 }

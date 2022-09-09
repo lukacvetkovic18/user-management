@@ -23,7 +23,7 @@ export class AdminsRepository extends Repository<Admin> {
             .delete()
             .from(Admin)
             .where("id = :id", { id: id })
-            .execute;
+            .execute();
         return "Admin deleted successfuly."
     }
 

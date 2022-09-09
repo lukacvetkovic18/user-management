@@ -1,20 +1,23 @@
 export const getAllItemsSchema = {
     tags: ["items"],
-    reponse: {
+    response: {
         200: {
             type: "array",
             items: {
-                id: {
-                    type: "number"
-                },
-                name: {
-                    type: "string"
-                },
-                image: {
-                    type: "string"
-                },
-                description: {
-                    type: "string"
+                type: "object",
+                properties: {
+                    id: {
+                        type: "number"
+                    },
+                    name: {
+                        type: "string"
+                    },
+                    image: {
+                        type: "string"
+                    },
+                    description: {
+                        type: "string"
+                    }
                 }
             }
         }
@@ -27,19 +30,22 @@ export const getItemSchema = {
             type: "number"
         }
     },
-    reponse: {
+    response: {
         200: {
-            id: {
-                type: "number"
-            },
-            name: {
-                type: "string"
-            },
-            image: {
-                type: "string"
-            },
-            description: {
-                type: "string"
+            type: "object",
+            properties: {
+                id: {
+                    type: "number"
+                },
+                name: {
+                    type: "string"
+                },
+                image: {
+                    type: "string"
+                },
+                description: {
+                    type: "string"
+                }
             }
         }
     }
