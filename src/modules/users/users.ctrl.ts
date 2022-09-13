@@ -104,6 +104,24 @@ export default async (server) => {
         }
     }
 
+    const getHomeItems = async (req, reply) => {
+        try {
+            return await uR.getHomeItems(req.params.id)
+        }
+        catch(e) {
+            console.error(e);
+        }
+    }
+
+    const getOfficeItems = async (req, reply) => {
+        try {
+            return await uR.getOfficeItems(req.params.id)
+        }
+        catch(e) {
+            console.error(e);
+        }
+    }
+
     return {
         getAllUsers,
         getUser,
@@ -115,6 +133,8 @@ export default async (server) => {
         insertItem,
         removeItem,
         requestPasswordReset,
-        resetPassword
+        resetPassword,
+        getHomeItems,
+        getOfficeItems
     }
 }

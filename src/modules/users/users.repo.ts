@@ -1,8 +1,4 @@
-import { add } from "lodash";
 import { EntityRepository, getCustomRepository, getRepository, Repository } from "typeorm";
-import { PlainObjectToNewEntityTransformer } from "typeorm/query-builder/transformer/PlainObjectToNewEntityTransformer";
-import { writeHeapSnapshot } from "v8";
-import { Address } from "../addresses/addresses.entity";
 import { AddressesRepository } from "../addresses/addresses.repo";
 import { Item } from "../items/items.entity";
 import { ItemsRepository } from "../items/items.repo";
@@ -130,5 +126,27 @@ export class UsersRepository extends Repository<User> {
             return this.changePassword(user.email, newPassword);
         }
         return "Incorrect PIN code"
+    }
+
+    public async getHomeItems(id) {
+        const result = this
+            .createQueryBuilder("user")
+            .leftJoinAndSelect("user.items", "items")
+            .leftJoin("items.location", "location")
+            .where("user.id = :id", { id: id })
+            .andWhere("location.placeType = :placeType", { placeType: "home" })
+            .getOne()
+        return result;
+    }
+
+    public async getOfficeItems(id) {
+        const result = this
+            .createQueryBuilder("user")
+            .leftJoinAndSelect("user.items", "items")
+            .leftJoin("items.location", "location")
+            .where("user.id = :id", { id: id })
+            .andWhere("location.placeType = :placeType", { placeType: "office" })
+            .getOne()
+        return result;
     }
 }

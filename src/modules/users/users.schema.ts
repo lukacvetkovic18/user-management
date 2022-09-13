@@ -15,6 +15,9 @@ export const getAllUsersSchema = {
                     lastName: {
                         type: "string"
                     },
+                    description: {
+                        type: "string"
+                    },
                     email: {
                         type: "string"
                     },
@@ -52,6 +55,9 @@ export const getUserSchema = {
                 lastName: {
                     type: "string"
                 },
+                description: {
+                    type: "string"
+                },
                 email: {
                     type: "string"
                 },
@@ -77,6 +83,9 @@ export const createUserSchema = {
                 type: "string"
             },
             lastName: {
+                type: "string"
+            },
+            description: {
                 type: "string"
             },
             email: {
@@ -139,10 +148,10 @@ export const updateUserSchema = {
             lastName: {
                 type: "string"
             },
-            email: {
+            description: {
                 type: "string"
             },
-            password: {
+            email: {
                 type: "string"
             },
             phoneNumber: {
@@ -299,6 +308,71 @@ export const resetPasswordSchema = {
             type: "object",
             properties: {
                 message: { type: "string" }
+            }
+        }
+    }
+}
+
+export const userAuthSchema = {
+    tags: ["users"],
+    body: {
+        type: "object",
+        properties: {
+            email : { type: "string" },
+            password: { type: "string" }
+        }
+    },
+    response: {
+        200: {
+            type: "object",
+            properties: {
+                token: { type: "string" }
+            }
+        }
+    }
+}
+
+export const getHomeItemsSchema = {
+    tags: ["users"],
+    params: {
+        id : { type: "number" }
+    },
+    response: {
+        200: {
+            type: "object",
+            properties: {
+                id: {
+                    type: "number"
+                },
+                firstName: {
+                    type: "string"
+                },
+                lastName: {
+                    type: "string"
+                },
+                email: {
+                    type: "string"
+                },
+                createdAt: {
+                    type: "string"
+                },
+                items: {
+                    type: "array",
+                    properties: {
+                        id: {
+                            type: "number"
+                        },
+                        name: {
+                            type: "string"
+                        },
+                        image: {
+                            type: "string"
+                        },
+                        description: {
+                            type: "string"
+                        }
+                    }
+                }
             }
         }
     }

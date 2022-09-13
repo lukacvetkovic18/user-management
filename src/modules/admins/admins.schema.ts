@@ -151,9 +151,6 @@ export const updateAdminSchema = {
             email: {
                 type: "string"
             },
-            password: {
-                type: "string"
-            },
             phoneNumber: {
                 type: "number"
             },
@@ -169,6 +166,26 @@ export const updateAdminSchema = {
                 message: {
                     type: "string"
                 }
+            }
+        }
+    }
+}
+
+
+export const adminAuthSchema = {
+    tags: ["admins"],
+    body: {
+        type: "object",
+        properties: {
+            email : { type: "string" },
+            password: { type: "string" }
+        }
+    },
+    response: {
+        200: {
+            type: "object",
+            properties: {
+                token: { type: "string" }
             }
         }
     }

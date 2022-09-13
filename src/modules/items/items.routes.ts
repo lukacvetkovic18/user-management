@@ -8,7 +8,7 @@ export default async (fastify, opts) => {
     fastify.route({
         method: "GET",
         url: "/items",
-        //preValidation
+        preValidation: fastify.adminAuth,
         handler: (await itemCtrl).getAllItems,
         schema: getAllItemsSchema
     })
@@ -16,7 +16,7 @@ export default async (fastify, opts) => {
     fastify.route({
         method: "GET",
         url: "/items/:id",
-        //preValidation
+        preValidation: fastify.adminAuth,
         handler: (await itemCtrl).getItem,
         schema: getItemSchema
     })

@@ -1,5 +1,4 @@
 import * as bcrypt from "bcrypt";
-import internal from "stream";
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, BeforeInsert, BeforeUpdate, ManyToMany, JoinTable, OneToMany, ManyToOne } from "typeorm"
 import { Address } from "../addresses/addresses.entity";
 import { Item } from "../items/items.entity";
@@ -15,6 +14,9 @@ export class User extends BaseEntity {
 
     @Column({ type: "varchar", nullable: false })
     lastName: string
+
+    @Column({ type: "varchar" })
+    description: string
 
     @Column({ type: "varchar", unique: true })
     email: string
