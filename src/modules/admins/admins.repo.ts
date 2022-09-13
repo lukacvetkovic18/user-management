@@ -8,6 +8,7 @@ export class AdminsRepository extends Repository<Admin> {
         return await this.find();
     }
 
+    //Gets certain admin by given id
     public async getAdmin(id) {
         return await this.findOne(id);
     }
@@ -17,6 +18,7 @@ export class AdminsRepository extends Repository<Admin> {
         return "Admin created successfuly."
     }
 
+    //Using query builder to delete admin
     public async deleteAdmin(id) {
         await this
             .createQueryBuilder()

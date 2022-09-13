@@ -17,9 +17,11 @@ export class Item extends BaseEntity {
     @Column({ type: "varchar", nullable: false })
     description: string
 
+    //One user can have many items in his possession
     @ManyToOne(() => User, (user) => user.items)
     user: User
 
+    //One location can store many items
     @ManyToOne(() => Address, (address) => address.items)
     location: Address
 }

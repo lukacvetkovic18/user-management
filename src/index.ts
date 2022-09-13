@@ -7,6 +7,9 @@ import fastifyOAS from "fastify-oas";
 import fastifySensible from "fastify-sensible";
 import fastifyBcrypt from "fastify-bcrypt";
 
+//This file is used to register Fastify plugins and setting their options
+//It is also used to run server on defined port
+
 config();
 
 const PORT = process.env.PORT || "3100";

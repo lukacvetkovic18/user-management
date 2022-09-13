@@ -7,6 +7,7 @@ export default async (fastify, opts) => {
     const adminCtrl = adminsCtrl(fastify);
     const adminRepo : Repository<Admin> = fastify.db.getRepository(Admin);
 
+    //This route allow admins to login as admin or superAdmin
     fastify.post("/admins/auth", { schema: adminAuthSchema },async (req, reply) => {
         const admin = await adminRepo.findOne({ where: { email: req.body.email }})
         if (!admin) {
@@ -19,6 +20,7 @@ export default async (fastify, opts) => {
             return reply.code(401).send({ message: "Sent password doesn't match database password."})
         }
         else {
+            //if attribute 'isSuperAdmin' is marked true, admin will be logged in as superAdmin
             let role : string;
             if (admin.isSuperAdmin) {
                 role = "SuperAdmin"

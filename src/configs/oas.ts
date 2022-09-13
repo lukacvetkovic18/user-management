@@ -1,3 +1,4 @@
+//Here are configured options for Fastify Swagger
 export const oas = {
     routePrefix: "/docs",
     swagger: {

@@ -1,6 +1,7 @@
 import fp from "fastify-plugin";
 import nodemailer from "nodemailer"
 
+//This plugin is used for sending e-mails to users who requested to reset their password
 const Mailer = {
     sendMail:async (emailData : any) => {
         if(!emailData.receiver) {

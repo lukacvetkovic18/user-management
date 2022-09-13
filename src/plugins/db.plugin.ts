@@ -6,6 +6,7 @@ import { AdminsRepository } from "../modules/admins/admins.repo";
 import { AddressesRepository } from "../modules/addresses/addresses.repo";
 import { ItemsRepository } from "../modules/items/items.repo";
 
+//This plugin connects API with MariaDB database
 export default fp (async (server, opts, done) => {
     try {
         const connectionOptions = await getConnectionOptions();

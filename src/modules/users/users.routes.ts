@@ -7,6 +7,7 @@ export default async (fastify, opts) => {
     const userCtrl = usersCtrl(fastify);
     const userRepo : Repository<User> = fastify.db.getRepository(User);
 
+    //This route allow users to login as user
     fastify.post("/users/auth", { schema: userAuthSchema },async (req, reply) => {
         const user = await userRepo.findOne({ where: { email: req.body.email }})
         if (!user) {

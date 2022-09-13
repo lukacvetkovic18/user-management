@@ -6,6 +6,7 @@ export default fp (async (fastify, opts, done) => {
     secret: "test"
   });
 
+  //If role sent in token is 'SuperAdmin', user will be registered as superAdmin
   fastify.decorate("superAdminAuth", async (req, reply) => {
     try {
       const token = await req.jwtVerify()
@@ -17,6 +18,7 @@ export default fp (async (fastify, opts, done) => {
     }
   })
 
+  //If role sent in token is 'Admin', user will be registered as admin
   fastify.decorate("adminAuth", async (req, reply) => {
     try {
       const token = await req.jwtVerify()
@@ -28,6 +30,7 @@ export default fp (async (fastify, opts, done) => {
     }
   })
 
+  //If role sent in token is 'User', user will be registered as user
   fastify.decorate("userAuth", async (req, reply) => {
     try {
       const token = await req.jwtVerify()

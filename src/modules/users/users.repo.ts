@@ -14,6 +14,7 @@ export class UsersRepository extends Repository<User> {
         return await this.find();
     }
 
+    //Gets certain user by given id
     public async getUser(id) {
         return await this.findOne(id);
     }
@@ -23,6 +24,7 @@ export class UsersRepository extends Repository<User> {
         return "User created successfuly."
     }
 
+    //Deletes certain user using query builder
     public async deleteUser(id) {
         await this
             .createQueryBuilder()
@@ -38,6 +40,7 @@ export class UsersRepository extends Repository<User> {
         return "User updated successfuly."
     }
 
+    //Creates many-to-many relation between certain user and address
     public async addAddress(user_id, address_id) {
         const user = await this.findOne(user_id);
         const address = await this._adR.findOne(address_id);
@@ -50,6 +53,7 @@ export class UsersRepository extends Repository<User> {
         return "Address added to user successfuly."
     }
 
+    //Removes certain many-to-many relation between user and address
     public async removeAddress(user_id, address_id) {
         const user = await this.findOne(user_id);
         const address = await this._adR.findOne(address_id);
@@ -62,6 +66,7 @@ export class UsersRepository extends Repository<User> {
         return "Address removed from user successfuly."
     }
 
+    //Creates new item and adds it to a certain location and user
     public async insertItem(data) {
         const user = await this.findOne(data.user_id);
         const address = await this._adR.findOne(data.address_id);
@@ -75,6 +80,7 @@ export class UsersRepository extends Repository<User> {
         return "Item created successfuly"
     }
 
+    //Removes certain item using query builder
     public async removeItem(id) {
         await this._iR
             .createQueryBuilder()
@@ -85,6 +91,7 @@ export class UsersRepository extends Repository<User> {
         return "Item deleted successfuly"
     }
 
+    //Private funtion that is called while reseting user's password
     private async changePassword(email, newPassword) {
         const user = await this.findOne({ where: { email: email }})
         user.password = newPassword;
@@ -92,6 +99,7 @@ export class UsersRepository extends Repository<User> {
         return "Password changed successfuly"
     }
 
+    //Function that creates all required data for reseting user's password
     public async requestPasswordReset(admin_id, email) {
         const user = await this.findOne({ where: { email: email }})
         const admin = await this.findOne(admin_id)
@@ -101,8 +109,10 @@ export class UsersRepository extends Repository<User> {
             this._pR.delete(pin);
         })
 
+        //This loop creates 6 random pins and saves them to the database
         for(let i = 0; i < 6; i++) {
             await this._pR.save(this._pR.create({
+                //Pin code is created using Math.random function that generates a random six digits number
                 code: Math.random() * (999999 - 100000) + 100000,
                 user: user
             }))
@@ -118,6 +128,7 @@ export class UsersRepository extends Repository<User> {
         return data;
     }
 
+    //This function should be called after requesting password reset, so you can change your password using inserted PIN codes
     public async resetPassword(code, email, newPassword) {
         const pin = await this._pR.findOne(code);
         
@@ -128,6 +139,7 @@ export class UsersRepository extends Repository<User> {
         return "Incorrect PIN code"
     }
 
+    //This function gets users and all his items which location is labeled "home"
     public async getHomeItems(id) {
         const result = this
             .createQueryBuilder("user")
