@@ -34,7 +34,7 @@ export default async (server) => {
 
     const deleteAddress = async (req, reply) => {
         try {
-            return await adR.deleteAddress(req.params.id)
+            return await adR.deleteAddress(req.body.id)
         }
         catch(e) {
             console.error(e);

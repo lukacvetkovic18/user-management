@@ -1,9 +1,51 @@
 export const getAllAdminsSchema = {
     tags: ["admins"],
-    reponse: {
+    response: {
         200: {
             type: "array",
             items: {
+                type: "object",
+                properties: {
+                    id: {
+                        type: "number"
+                    },
+                    firstName: {
+                        type: "string"
+                    },
+                    lastName: {
+                        type: "string"
+                    },
+                    email: {
+                        type: "string"
+                    },
+                    phoneNumber: {
+                        type: "number"
+                    },
+                    age: {
+                        type: "number"
+                    },
+                    createdAt: {
+                        type: "string"
+                    },
+                    isSuperAdmin: {
+                        type: "boolean"
+                    }
+                }
+            }
+        }
+    }
+}
+export const getAdminSchema = {
+    tags: ["admins"],
+    params: {
+        id: {
+            type: "number"
+        }
+    },
+    response: {
+        200: {
+            type: "object",
+            properties: {
                 id: {
                     type: "number"
                 },
@@ -28,42 +70,6 @@ export const getAllAdminsSchema = {
                 isSuperAdmin: {
                     type: "boolean"
                 }
-            }
-        }
-    }
-}
-export const getAdminSchema = {
-    tags: ["admins"],
-    params: {
-        id: {
-            type: "number"
-        }
-    },
-    reponse: {
-        200: {
-            id: {
-                type: "number"
-            },
-            firstName: {
-                type: "string"
-            },
-            lastName: {
-                type: "string"
-            },
-            email: {
-                type: "string"
-            },
-            phoneNumber: {
-                type: "number"
-            },
-            age: {
-                type: "number"
-            },
-            createdAt: {
-                type: "string"
-            },
-            isSuperAdmin: {
-                type: "boolean"
             }
         }
     }
@@ -96,7 +102,7 @@ export const createAdminSchema = {
             }
         }
     },
-    reponse: {
+    response: {
         200: {
             type: "object",
             properties: {
@@ -131,27 +137,27 @@ export const deleteAdminSchema = {
 export const updateAdminSchema = {
     tags: ["admins"],
     body: {
-        id: {
-            type: "number"
-        },
-        firstName: {
-            type: "string"
-        },
-        lastName: {
-            type: "string"
-        },
-        email: {
-            type: "string"
-        },
-        password: {
-            type: "string"
-        },
-        phoneNumber: {
-            type: "number"
-        },
-        age: {
-            type: "number"
-        },
+        type: "object",
+        properties: {
+            id: {
+                type: "number"
+            },
+            firstName: {
+                type: "string"
+            },
+            lastName: {
+                type: "string"
+            },
+            email: {
+                type: "string"
+            },
+            phoneNumber: {
+                type: "number"
+            },
+            age: {
+                type: "number"
+            },
+        }
     },
     response: {
         200: {
@@ -160,6 +166,26 @@ export const updateAdminSchema = {
                 message: {
                     type: "string"
                 }
+            }
+        }
+    }
+}
+
+
+export const adminAuthSchema = {
+    tags: ["admins"],
+    body: {
+        type: "object",
+        properties: {
+            email : { type: "string" },
+            password: { type: "string" }
+        }
+    },
+    response: {
+        200: {
+            type: "object",
+            properties: {
+                token: { type: "string" }
             }
         }
     }

@@ -7,7 +7,7 @@ export default async (fastify, opts) => {
     fastify.route({
         method: "GET",
         url: "/addresses",
-        //preValidation
+        preValidation: fastify.adminAuth,
         handler: (await addressCtrl).getAllAddresses,
         schema: getAllAddressesSchema
     })
@@ -15,7 +15,7 @@ export default async (fastify, opts) => {
     fastify.route({
         method: "GET",
         url: "/addresses/:id",
-        //preValidation
+        preValidation: fastify.adminAuth,
         handler: (await addressCtrl).getAddress,
         schema: getAddressSchema
     })
@@ -23,7 +23,7 @@ export default async (fastify, opts) => {
     fastify.route({
         method: "POST",
         url: "/addresses",
-        //preValidation
+        preValidation: fastify.adminAuth,
         handler: (await addressCtrl).createAddress,
         schema: createAddressSchema
     })
@@ -31,7 +31,7 @@ export default async (fastify, opts) => {
     fastify.route({
         method: "DELETE",
         url: "/addresses",
-        //preValidation
+        preValidation: fastify.adminAuth,
         handler: (await addressCtrl).deleteAddress,
         schema: deleteAddressSchema
     })
@@ -39,7 +39,7 @@ export default async (fastify, opts) => {
     fastify.route({
         method: "PUT",
         url: "/addresses",
-        //preValidation
+        preValidation: fastify.adminAuth,
         handler: (await addressCtrl).updateAddress,
         schema: updateAddressSchema
     })

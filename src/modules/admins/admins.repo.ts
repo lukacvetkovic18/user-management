@@ -1,4 +1,4 @@
-import { EntityRepository, getRepository, Repository } from "typeorm";
+import { EntityRepository, Repository } from "typeorm";
 import { Admin } from "./admins.entity";
 
 @EntityRepository(Admin)
@@ -23,7 +23,7 @@ export class AdminsRepository extends Repository<Admin> {
             .delete()
             .from(Admin)
             .where("id = :id", { id: id })
-            .execute;
+            .execute();
         return "Admin deleted successfuly."
     }
 

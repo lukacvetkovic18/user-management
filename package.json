@@ -31,7 +31,7 @@
     "fastify-autoload": "^3.9.0",
     "fastify-bcrypt": "^1.0.0",
     "fastify-cors": "^6.0.3",
-    "fastify-jwt": "^3.1.0",
+    "fastify-jwt": "^3.2.1",
     "fastify-oas": "^3.0.8",
     "fastify-plugin": "^3.0.0",
     "fastify-rate-limit": "^5.9.0",

@@ -30,11 +30,11 @@ export class Address extends BaseEntity {
         enum: placeType,
         default: placeType.HOME
     })
-    type: placeType
+    placeType: placeType
 
-    @ManyToMany(() => User)
+    @ManyToMany(() => User, (user) => user.addresses)
     users: User[]
 
-    @OneToMany(() => Item, (item) => item.location)
+    @OneToMany(() => Item, (item) => item.location, { cascade: true })
     items: Item[]
 }
