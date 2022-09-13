@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToMany, OneToMa
 import { Item } from "../items/items.entity"
 import { User } from "../users/users.entity"
 
+//This enum is used to define if location is user's home or work place
 export enum placeType {
     HOME = "home",
     OFFICE = "office"
@@ -32,9 +33,11 @@ export class Address extends BaseEntity {
     })
     placeType: placeType
 
+    //More users can use the same address, also a user can use more addresses
     @ManyToMany(() => User, (user) => user.addresses)
     users: User[]
 
+    //More items can be stored in one location
     @OneToMany(() => Item, (item) => item.location, { cascade: true })
     items: Item[]
 }

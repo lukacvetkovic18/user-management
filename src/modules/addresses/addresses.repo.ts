@@ -7,7 +7,7 @@ export class AddressesRepository extends Repository<Address> {
     public async getAllAddresses() {
         return await this.find();
     }
-
+    //Gets certain address by given id
     public async getAddress(id) {
         return await this.findOne(id);
     }
@@ -16,7 +16,7 @@ export class AddressesRepository extends Repository<Address> {
         await this.save(this.create(data));
         return "Address created successfuly."
     }
-
+    //Using query builder to delete address
     public async deleteAddress(id) {
         this
             .createQueryBuilder()

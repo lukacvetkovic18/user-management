@@ -88,6 +88,7 @@ export default async (server) => {
     const requestPasswordReset = async (req, reply) => {
         try {
             const data = await uR.requestPasswordReset(req.body.admin_id, req.body.email)
+            //Here is used the mail plugin that sends PIN codes to user's email
             return await server.sendMail(data);
         }
         catch(e) {
